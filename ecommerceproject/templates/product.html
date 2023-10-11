@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<div>
+    <p><a href="{% url 'home' %}">Home</a> | <a href="{{ product.category.get_url }}">{{ product.category.name }}</a> | {{ product.name }}</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <img src="{{ product.image.url }}" alt="No image" style="width: 400px; height: 400px; margin-bottom: 30%;">
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <h1>{{ product.name }}</h1>
+            <h4>₹{{ product.price }}</h4>
+            <br>
+            <h6>Product Description</h6>
+            <p>{{ product.description | linebreaks | safe }}</p>
+            {% if product.stock == 0 %}
+                <div class="btn btn-danger">Out of Stock</div>
+            {% else %}
+                <div>
+                    <a href="#" id="addToCartBtn" class="btn btn-secondary">Add to Cart</a>
+                </div>
+
+              <script>
+                    // JavaScript code for handling the "Add to Cart" button click
+                    document.getElementById('addToCartBtn').addEventListener('click', function () {
+                        {% if user.is_authenticated %}
+                        // Make an AJAX request to add the product to the cart
+                        const productId = '{{ product.id }}';
+                        const button = this;  // Store a reference to the button
+                        fetch(`/add_to_cart/${productId}/`)
+                            .then(response => {
+                                if (response.status === 200) {
+                                    // Handle success, e.g., show a confirmation message
+                                    alert('Item added to cart');
+                                    button.classList.remove('btn-secondary');
+                                    button.classList.add('btn-success');
+                                    button.textContent = 'Added to Cart';
+                                } else {
+                                    // Handle error, e.g., show an error message
+                                    alert('Failed to add item to cart');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+
+                        {% else %}
+                                alert('Please log in to add items to your cart');
+                        {% endif %}
+                    });
+
+                </script>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

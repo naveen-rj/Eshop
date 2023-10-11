@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+ <style>
+          .login,
+          .image {
+              min-height: 100vh;
+          }
+
+          .bg-image {
+              background-image: url('{% static 'img/logo.png' %}');
+              background-size: cover;
+              background-position: center center;
+          }
+
+          .container-fluid {
+              max-width: 100%;
+          }
+
+          .account-form input {
+              border: 2px solid #ccc;
+              height: calc(2em + .75rem + 2px);
+          }
+
+          .account-form input:focus {
+              border-color: #1497ff;
+              box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 0px rgba(255, 0, 0, 0.6);
+          }
+      </style>
+
+
+      <div class="container-fluid" style="margin: auto;">
+          <div class="row no-gutter">
+             <div class="col-md-6 d-none d-md-flex bg-image"></div>
+              <div class="col-md-6 bg-light">
+                  <div class="login d-flex align-items-center py-5">
+                      <div class="container">
+                          <div class="row">
+                              <div class="col-8 col-md-8  ml-auto">
+                                  <p class="h4 mb-4 font-weight-bold">Sign In</p>
+
+                                      {% if error_message %}
+                                        {{ error_message }}
+                                      {% endif %}
+                                      <form method="post">
+                                          {% csrf_token %}
+                                        <div class="form-group">
+                                          <div class="col-7">
+                                          <label for="username">Username</label>
+                                          <input type="text" class="form-control" id="username" name='username' placeholder="Username">
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <div class="col-7">
+                                          <label for="password">Password</label>
+                                          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                          </div>
+
+                                        </div>
+                                          <div>
+                                            <h6>If you are a new user <a href="{% url 'signup' %}" class="text-success">Register</a></h6>
+
+
+                                          </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                                      </form>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+      </div>
+{% endblock %}

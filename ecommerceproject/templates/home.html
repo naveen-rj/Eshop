@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}E-Shop{% endblock %}
+{% block content %}
+{% if category %}
+<div xmlns="http://www.w3.org/1999/html">
+  <br>
+  <h1 style="text-align: center;">{{ category.name }}</h1>
+  <p><img src="{{ category.image.url }}" style="float: left; margin-right: 20px;">{{ category.description|linebreaks|safe }}</p>
+  <div class="container">
+    <div class="row">
+      {% for product in products %}
+      <div class="col-9 col-sm-12 col-md-4 col-lg-4">
+        <div class="card my-4">
+          <a href="{{ product.get_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}"></a>
+        <div class="card-body bg-secondary text-white">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.description|linebreaks|safe }}</p>
+        </div>
+        </div>
+      </div>
+      {% endfor %}
+      <br>
+    </div>
+  </div>
+</div>
+{% else %}
+<div>
+  <img src="{% static 'img/wall.png' %}" style="width: 100%; height: auto;" alt="wallpaper">
+</div>
+
+    <div>
+      <br>
+      <h1 style="text-align: center;">Our Products Collection</h1>
+      <p>
+        Welcome to our shopping site, where you'll find an extensive collection of products across various categories to suit your needs. We take pride in offering a diverse range of products, including electronics, home and living items, and dress materials.
+      </p>
+      <p>
+        In our electronics collection, you'll discover the latest gadgets and cutting-edge technology to enhance your daily life. From smartphones and laptops to smart home devices and audio equipment, we have a wide selection of electronics from well-known brands. Whether you're a tech enthusiast or simply looking to upgrade your devices, our electronics collection has something for everyone.
+      </p>
+      <p>
+        For those seeking to transform their living spaces, our home and living section is the perfect destination. Explore a plethora of stylish and functional products such as furniture, decor, kitchen appliances, bedding, and much more. We understand that everyone has unique tastes and preferences when it comes to home design, which is why we offer a diverse range of options to suit various styles and budgets.
+      </p>
+      <p>
+        If you have a passion for fashion and love to express your personal style, our dress materials collection will captivate you. Discover an array of clothing options for every occasion, ranging from casual wear to formal attire. Whether you're searching for trendy outfits, traditional garments, or comfortable loungewear, our dress materials section offers an extensive assortment to meet your fashion needs.
+      </p>
+      <p>
+        At our shopping site, we strive to curate high-quality products that are not only visually appealing but also reliable and durable. We prioritize customer satisfaction and aim to provide a seamless shopping experience with secure payment options, easy navigation, and excellent customer support.
+      </p>
+      <p>
+        Browse through our product categories of electronics, home and living, and dress materials to find exactly what you're looking for. We regularly update our inventory to bring you the latest products, ensuring that you stay ahead of the curve in terms of technology, home decor, and fashion trends.
+      </p>
+      <p>
+        Shop with confidence at our online store, and let us help you find the perfect products to enhance your lifestyle and express your individuality.
+      </p>
+    </div>
+
+  <div class="container">
+    {% for category, products in category_products.items %}
+      {% if products %}
+      <h1 style="text-align: center;">{{ category.name }}</h1>
+      <div class="row">
+        {% for product in products %}
+          <div class="col-9 col-sm-12 col-md-4 col-lg-4">
+            <div class="card my-4" style="width: 300px; height: auto;">
+              <a href="{{ product.get_url }}"><img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap"></a>
+            <div class="card-body">
+            <h5 class="card-title text-center">{{ product.name }}</h5>
+            <p class="card-text text-center bg-secondary text-white">Price: ₹{{ product.price }}</p>
+            </div>
+            </div>
+            </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% endblock %}
