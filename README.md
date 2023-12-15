@@ -1,5 +1,5 @@
 # Eshop - E-commerce Website
-Eshop is a feature-rich e-commerce platform built using modern technologies to provide a seamless and customizable online shopping experience. Explore a wide range of features designed to enhance both user and administrator interactions.
+Eshop is an open-source e-commerce platform built with Django, offering a scalable and customizable solution for online businesses.
 
 ## Features
 - User Authentication: Secure registration and login system for user accounts.
