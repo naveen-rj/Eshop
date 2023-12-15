@@ -10,3 +10,8 @@ Eshop is a feature-rich e-commerce platform built using modern technologies to p
 - Django: A high-level Python web framework for the backend logic and server-side development.
 - Python: The programming language for implementing backend functionality.
 - HTML, CSS, JavaScript: Frontend technologies for creating an engaging and dynamic user interface.
+
+## Installation
+1. Clone the repository
+2. Install dependencies
+3. Run the development server
